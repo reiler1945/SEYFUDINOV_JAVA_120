@@ -9,7 +9,7 @@ class Program {
 							char(int(number / (2^3)) + _
 							char(int(number / (2^2)) + _
 							char(int(number / (2^1)) + _
-							char(int(number / (2^0)) + _	
+							char(int(number % (2^0)) + _	
 						  );
 	}
 }
