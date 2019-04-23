@@ -1,15 +1,23 @@
 class Program {
 	public static void main(String args[]) {
 		int number = 135;
-		System.out.println(
-			          		char(int(number / (2^7)) + _
-							char(int(number / (2^6)) + _
-							char(int(number / (2^5)) + _
-							char(int(number / (2^4)) + _
-							char(int(number / (2^3)) + _
-							char(int(number / (2^2)) + _
-							char(int(number / (2^1)) + _
-							char(int(number % (2^0)) + _	
-						  );
+		int x0, x1, x2, x3, x4, x5, x6, x7;
+		x0 = number % 2;
+		number /= 2;
+		x1 = number % 2;
+		number /= 2;
+		x2 = number % 2;
+		number /= 2;
+		x3 = number % 2;
+		number /= 2;
+		x4 = number % 2;
+		number /= 2;
+		x5 = number % 2;
+		number /= 2;
+		x6 = number % 2;
+		number /= 2;
+		x7 = number % 2;
+		number /= 2;
+		System.out.println(x7 + "" + x6 + "" + x5 + "" + x4 + "" + x3 + "" + x2 + "" + x1 + "" + x0);
 	}
 }
