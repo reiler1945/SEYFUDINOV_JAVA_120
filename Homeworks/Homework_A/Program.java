@@ -24,7 +24,7 @@ class Program{
              
             System.out.println(ex.getMessage());
         }
-        // считаем данные и построим гистограмму
+        // считаем данные из файла
 		try {
             File file = new File("data.txt");
             //создаем объект FileReader для объекта File
