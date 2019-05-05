@@ -1,6 +1,6 @@
 class Program {
 	public static void main(String[] args) {
-		// initialization
+		// initialization списка
 		SList list = new SList();
 		SList temp = list;
 		for (int i = 0; i < 10; i++) {
@@ -9,30 +9,25 @@ class Program {
 			temp = temp.next;	
 		};
 		// print list
+		System.out.println("Straight:");
 		temp = list;
 		while (temp.next != null) {
 			System.out.println("value = " + temp.value);
 			temp = temp.next;	
 		};
-		// do revers
-		SList rlist = null;
-		SList head, previous;
-		head = list;
-		previous = null;
-		while (list.next != null) {
-			temp = list.next.next;
-			System.out.println("Я здесь. value = " + head.value);	
-			if (head.next == null) {
-				System.out.println("Я здесь. value = " + head.value);	
-			}
-			head.next = previous;
-			previous = list;
-			head = list.next;
-			list = temp;
-		}; 
-		rlist = head;
-		// print list
-		temp = rlist;
+		// do reverse
+		SList previous = null;
+		SList current = list;
+		SList forward; 
+		while (current != null) {
+			forward = current.next;
+			current.next = previous;
+			previous = current;
+			current = forward;
+		}
+		// print reverse list
+		System.out.println("Reverse:");
+		temp = previous;
 		while (temp.next != null) {
 			System.out.println("value = " + temp.value);
 			temp = temp.next;	
