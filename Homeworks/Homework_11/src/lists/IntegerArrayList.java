@@ -7,13 +7,17 @@ public class IntegerArrayList {
 
     //добавим элемент в список
     void add(int element) {
-        if (currentLength == 10) {
-            System.out.println("Can't add element " + element + ". The list is full");
-        } else {
-            array[currentLength] = element;
-            currentLength++;
-            System.out.println("added element = " + element + " by index = " + (currentLength - 1));
+        // если длины массива не хватает, увеличим в 1.5 раза
+        if (currentLength == array.length) {
+            int[] array_new = new int[(int)(array.length * 1.5)];
+            for (int i = 0; i < array.length; i++) {
+                array_new[i] = array[i];
+            }
+            array = array_new;
         }
+        array[currentLength] = element;
+        currentLength++;
+        System.out.println("added element = " + element + " by index = " + (currentLength - 1));
     }
 
     //элемент по индексу
