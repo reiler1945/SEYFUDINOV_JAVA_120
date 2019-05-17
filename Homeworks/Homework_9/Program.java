@@ -1,6 +1,7 @@
 /*
 Реализовать сортировку слиянием.
 */
+import java.util.Arrays;
 class Program {
 	public static void main(String[] args) {
 		int a[] = {-1, 5, -3, 20, 11, 0, 2, 6};
@@ -15,12 +16,13 @@ class Program {
 			System.out.println(b[i]);
 		}
 		System.out.println("-----------------------");
-		int c[] = {-1, 5, -3, 20, 11, 0, 2, 6};
-		c = mergeSort(c);
+		int c[] = new int[100];
 		for (int i = 0; i < c.length; i++) {
-			System.out.println(c[i]);
-		}				
-		System.out.println("-----------------------");
+			c[i] = 100 - i;
+		}
+		int d[] = new int[c.length];
+		mergeSort(c, d, 0, c.length - 1);
+		System.out.println(Arrays.toString(c));			
 	}
 	/*сортировка выбором*/
 	public static int[] selectionSort(int[] a) {
@@ -53,51 +55,49 @@ class Program {
 		return a;
 	}
 	/*сортировка слиянием*/
-	public static int[] mergeSort(int[] a) {
+	//lo - low, mi - middle, hi = high	
+	public static void mergeSort(int[] a, int[] b, int lo, int hi) {
 		// если массив нулевой или единичной длины
-		if (a.length <= 1) {
-			return a;	
+		if ((a.length <= 1) || (lo == hi)) {
+			b[lo] = a[lo];
+			return;
 		} else {
 			// делим массив на 2 части
-			int[] left = new int[a.length / 2];
-			int[] right = new int[a.length - left.length];
-			for (int i = 0; i < a.length; i++) {
-				if (i < left.length) {
-					left[i] = a[i];
-				}	
-				else { 	
-					right[i - left.length] = a[i];
-				}		
-			} 
+			int mi = lo + (hi - lo) / 2;
 			// сортируем полученные части
-			left = mergeSort(left);
-			right = mergeSort(right); 
+			mergeSort(a, b, lo, mi);
+			if (mi < hi) {
+				mi++;
+			}
+			mergeSort(a, b, mi, hi); 
 			// производим слияние 2-х отсортированных массивов в третий
-			int[] result = new int[left.length + right.length];
-			int k = 0;
-			int m = 0;
-			for (int i = 0; i < (left.length + right.length); i++) {
+			int k = lo;
+			int m = mi;
+			for (int i = lo; i <= hi; i++) {
 				// если не вышли за границу одного из массивов
-				if ((k < left.length) && (m < right.length)) {
-					if (left[k] < right[m]) {
-						result[i] = left[k];
+				if ((k < mi) && (m <= hi)) {
+					if (b[k] < b[m]) {
+						a[i] = b[k];
 						k++;
 					} else {
-						result[i] = right[m];
+						a[i] = b[m];
 						m++;
 					}					
 				} else {
-					// если вышли за границу right
-					if (k < left.length) {
-						result[i] = left[k];
+					// если вышли за границу 
+					if (k < mi) {
+						a[i] = b[k];
 						k++;
 					} else {
-						result[i] = right[m];
+						a[i] = b[m];
 						m++;
 					}
 				} 
 			}
-			return result;
+			//переприсваиваем отсортированную часть буферному массиву
+			for (int i = lo; i <= hi; i++) {
+				b[i] = a[i];
+			}	
 		}
 	}					
 }
