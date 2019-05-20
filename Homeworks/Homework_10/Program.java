@@ -45,10 +45,10 @@ public class Program {
          for (int i = 0; i < text.length; i++) {
             int charCode = (int)text[i];
             //отображаем код символа в диапазон массива [0-25]           
-            if (charCode > 90) {
+            if (charCode > 'Z') {
                charCode = charCode - 32;
             }
-            charCode = charCode - 65;
+            charCode = charCode - 'A';
             if ((charCode >= 0) && (charCode < 25)) {
                count[charCode]++;
             }
@@ -76,13 +76,13 @@ public class Program {
            int charCode = (int)text[i];
            //отображаем код символа в диапазон массива [0-32]
            //для символа 'ё' отдельный алгоритм
-           if ((charCode == 1025) || (charCode == 1105)) {
+           if ((charCode == 'Ё') || (charCode == 'ё')) {
                 count[32]++;
            } else {
-                if (charCode > 1071) {
+                if (charCode > 'Я') {
                  charCode = charCode - 32;
                 }
-                charCode = charCode - 1040;
+                charCode = charCode - 'А';
                 if ((charCode >= 0) && (charCode < 32)) {
                  count[charCode]++;
                 }
@@ -100,7 +100,7 @@ public class Program {
            for (int i = 0; i < count.length; i++) {
                 if (count[i] == maxCount) {
                  if (i == 32) {
-                      System.out.println((char)1105 + ":" + maxCount);
+                      System.out.println('ё' + ":" + maxCount);
                  } else {
                       System.out.println((char)(i + 1040 + 32) + ":" + maxCount);
                  }      
