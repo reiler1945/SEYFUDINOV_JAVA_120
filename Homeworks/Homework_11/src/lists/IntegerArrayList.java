@@ -2,11 +2,11 @@ package lists;
 
 public class IntegerArrayList {
 
-    int[] array;
-    int currentLength = 0; //актуальная длина списка
+    private int[] array;
+    private int currentLength = 0; //актуальная длина списка
 
     //добавим элемент в список
-    void add(int element) {
+    public void add(int element) {
         // если длины массива не хватает, увеличим в 1.5 раза
         if (currentLength == array.length) {
             int[] array_new = new int[(int)(array.length * 1.5)];
@@ -21,7 +21,7 @@ public class IntegerArrayList {
     }
 
     //элемент по индексу
-    int get(int index) {
+    public int get(int index) {
         if ((index < currentLength) && (index >= 0)) {
             return array[index];
         }
@@ -29,7 +29,7 @@ public class IntegerArrayList {
     }
 
     //удалим элемент по индексу
-    void removeByIndex(int index) {
+    public void removeByIndex(int index) {
         if ((index >= currentLength) && (index < 0)) {
             System.out.println("index = " + index + " is out of the list diapason");
         } else {
@@ -44,7 +44,7 @@ public class IntegerArrayList {
     }
 
     //удалим элемент по значению
-    void removeByValue(int value) {
+    public void removeByValue(int value) {
         int index = indexOf(value);
         if (index == -1) {
             System.out.println("There are no elements with value = " + value);
@@ -57,7 +57,7 @@ public class IntegerArrayList {
     }
 
     //индекс элемента по значению
-    int indexOf(int value) {
+    public int indexOf(int value) {
         for (int i = 0; i < currentLength; i++) {
             if (array[i] == value) {
                 return i;
@@ -67,13 +67,18 @@ public class IntegerArrayList {
     }
 
     //отобразим array list
-    void print() {
+    public void print() {
         String result = "[";
         for (int i = 0; i < currentLength; i++) {
             result = result + array[i] + ",";
         }
         result = result + "]";
         System.out.println(result);
+    }
+
+    //конструктор
+    IntegerArrayList() {
+        this.array = new int[10];
     }
 
 }

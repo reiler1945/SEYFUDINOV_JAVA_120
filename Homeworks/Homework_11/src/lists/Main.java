@@ -3,7 +3,6 @@ package lists;
 public class Main {
     public static void main(String[] args) {
         IntegerArrayList list = new IntegerArrayList();
-        list.array = new int[10];
         list.print();
         list.add(1);
         list.add(2);
