@@ -22,7 +22,10 @@ public class Channel {
 		return null;
 	}
 	public void setPrograms(Program[] programs) {
-		this.programs = programs;
+		this.programs = new Program[programs.length]
+		for (int i = 0; i < this.programs.length; i++) {
+			this.programs[i] = new Program(programs.getName());
+		};
 	}
 	
 	//запретим создавать объекты через конструктор по умолчанию
