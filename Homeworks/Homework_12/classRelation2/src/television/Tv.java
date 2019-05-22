@@ -24,6 +24,7 @@ public class Tv {
 	//привяжем список каналов к ТВ
 	public void setChannels(Channel[] channels) {
 		this.channels = channels;
+		//TODO: как реализовать этот метод, если необходимо скопировать не ссылку, а сами объекты, входящие в состав channels?
 	}	
 	
 	//выбираем канал из списка по номеру
