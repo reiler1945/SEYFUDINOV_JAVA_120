@@ -34,27 +34,27 @@ public class Main {
             System.out.println(playersArray[i].getName() + ": очков = " + playersArray[i].getScore() + " health = " + playersArray[i].getHealth());
         }
         
-        //НАДИР: атака, если нет Weapon у объекта, то будет вызван метод Players.hit(...)
+        //атака рукой, так как нет оружия
         nadir.hit(marsel);
         
-        //НАДИР: дадим огнестрельное оружие UpgradedPlayer 
+        //даем огнестрельное оружие
         nadir.setWeapon(new MachineGun("MG-42"));
         
-        //НАДИР: перезарядим огнестрельное оружие, так как по умолчанию оно не заряжено
+        //перезарядим огнестрельное оружие, так как по умолчанию оно не заряжено
         HotWeapon hotWeapon = (HotWeapon) nadir.getWeapon();
         hotWeapon.reload();
         
-        //НАДИР: атакуем уже с помощью оружия
+        //атакуем уже с помощью оружия
         nadir.hit(medved);
         
-        //НАДИР: поменяем оружие на меч
+        //поменяем оружие на меч
         nadir.setWeapon(new Sword());
         
-        //НАДИР: снова атакуем
+        //снова атакуем
         nadir.hit(oleg);
         nadir.hit(medved);
         
-        //ОЛЕГ: атакуем  
+        //атакуем  
         oleg.hit(marsel);
         
         //отобразим конечные характеристики объектов
