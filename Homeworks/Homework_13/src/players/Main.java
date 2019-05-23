@@ -14,6 +14,7 @@
 2. Задание 12: как реализовать метод Tv.setChannels()? Создавать копию массива массивов объектов?
 3. Singleton: отличия между экземпляр создавать через static() и через отдельный public static getInstance() 
 4. как переносить условия в HotWeapo.reload()?
+5. как на практике не теряют связь protected полей из класса предка в классе потомке? 
 */
 package players;
 public class Main {
