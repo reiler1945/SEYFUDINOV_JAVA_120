@@ -1,11 +1,13 @@
 package players;
 public class UpgradedPlayer extends Player {
     private static final int INITIAL_BULLETS_AMOUNT = 20;
-
+    
+    //боезапас
     private int bulletsAmount;
-
+    
+    //оружие
     private Weapon weapon;
-
+    
     public UpgradedPlayer(String name, double health) {
         super(name, health);
         this.bulletsAmount = INITIAL_BULLETS_AMOUNT;
@@ -31,9 +33,9 @@ public class UpgradedPlayer extends Player {
     public Weapon getWeapon() {
         return weapon;
     }
-
+    
+    //берем оружие
     public void setWeapon(Weapon weapon) {
-        //игрок берет оружие 
         this.weapon = weapon;
         //назначаем владельца оружия
         this.weapon.setOwner(this); 
