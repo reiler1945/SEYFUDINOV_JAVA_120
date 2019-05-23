@@ -19,9 +19,11 @@ public abstract class HotWeapon extends Weapon{
 	public String getName() {
 		return name;
 	}
-
+	
+	//выстрел
 	public abstract void shot();
-
+	
+	//реализация действия оружия 
 	public int action() {
 		if (this.bulletsInMagazine / bulletsForShot == 0) {
 			System.err.println("No more bullets in the gun " + this.getName() + "!");
@@ -34,8 +36,7 @@ public abstract class HotWeapon extends Weapon{
 	}
 
 	// перезарядка магазина
-	// как переносить условия?
-	public void reloadFrom(UpgradedPlayer upgradedPlayer) {
+	public void reload() {
 		if (this.bulletsInMagazine > 0) {
 			System.err.println("Magazine is not empty yet!");
 			return;
@@ -46,7 +47,7 @@ public abstract class HotWeapon extends Weapon{
 		}
 		if (upgradedPlayer.getBulletsAmount() / maxBulletsInMagazine > 0) {
 			bulletsInMagazine =+ maxBulletsInMagazine;
-			upgradedPlayer.setBulletsAmount(upgradedPlayer.getBulletsAmount() - maxBulletsInMagazine);
+			this.owner.setBulletsAmount(this.owner.getBulletsAmount() - maxBulletsInMagazine);
 			System.out.println("Magazine is full!");
 			return;
 		}
