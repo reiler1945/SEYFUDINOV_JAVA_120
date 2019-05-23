@@ -13,6 +13,7 @@
 1. как называть пакеты, если они состоят из 2 и более слов?
 2. Задание 12: как реализовать метод Tv.setChannels()? Создавать копию массива массивов объектов?
 3. Singleton: отличия между экземпляр создавать через static() и через отдельный public static getInstance() 
+4. как переносить условия в HotWeapo.reload()?
 */
 package players;
 public class Main {
@@ -31,20 +32,30 @@ public class Main {
             System.out.println(playersArray[i].getName() + ": очков = " + playersArray[i].getScore() + " health = " + playersArray[i].getHealth());
         }
         
-        //атака, если нет Weapon у объекта, то будет вызван метод Players.hit(...)
+        //НАДИР: атака, если нет Weapon у объекта, то будет вызван метод Players.hit(...)
         nadir.hit(marsel);
         
-        //дадим оружие UpgradedPlayer 
+        //НАДИР: дадим огнестрельное оружие UpgradedPlayer 
         nadir.setWeapon(new MachineGun("MG-42"));
         
-        
+        //НАДИР: перезарядим огнестрельное оружие, так как по умолчанию оно не заряжено
         HotWeapon hotWeapon = (HotWeapon) nadir.getWeapon();
-        hotWeapon.reloadFrom(nadir);
+        hotWeapon.reload();
+        
+        //НАДИР: атакуем уже с помощью оружия
         nadir.hit(medved);
+        
+        //НАДИР: поменяем оружие на меч
         nadir.setWeapon(new Sword());
+        
+        //НАДИР: снова атакуем
         nadir.hit(oleg);
         nadir.hit(medved);
+        
+        //ОЛЕГ: атакуем  
         oleg.hit(marsel);
+        
+        //отобразим конечные характеристики объектов
         for (int i = 0; i < playersArray.length; i++) {
             System.out.println(playersArray[i].getName() + ": очков = " + playersArray[i].getScore() + " health = " + playersArray[i].getHealth());
         }
