@@ -10,7 +10,7 @@ public abstract class Weapon {
     //владелец оружия
     protected PlayerUpgraded owner;
 
-    // действие оружия
+    // действие оружия -1 - неуспешно (нет патронов), 1 - успешно
     public abstract int action();
 
     // нанесение урона
