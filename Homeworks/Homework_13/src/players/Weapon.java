@@ -19,14 +19,17 @@ public abstract class Weapon {
         player.setHealth(player.getHealth() - this.damage);
     }
     
+    //бонус при уроне врага
     public int getBonus() {
         return bonus;
     }
     
+    //получим владельца оружия
     public int getOwner() {
         return owner;
     }
-
+    
+    //назначим владельца оружия
     protected void setOwner(PlayerUpgraded owner) {
         this.owner = owner;
     }
