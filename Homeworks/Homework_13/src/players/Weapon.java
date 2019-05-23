@@ -8,7 +8,7 @@ public abstract class Weapon {
     protected static int bonus;
     
     //владелец оружия
-    protected PlayerUpgraded owner;
+    protected UpgradedPlayer owner;
 
     // действие оружия -1 - неуспешно (нет патронов), 1 - успешно
     public abstract int action();
@@ -25,12 +25,12 @@ public abstract class Weapon {
     }
     
     //получим владельца оружия
-    public int getOwner() {
+    public UpgradedPlayer getOwner() {
         return owner;
     }
     
     //назначим владельца оружия
-    protected void setOwner(PlayerUpgraded owner) {
+    protected void setOwner(UpgradedPlayer owner) {
         this.owner = owner;
     }
 }
