@@ -11,7 +11,8 @@ public class Gun extends HotWeapon {
 	public Gun(String name) {
 		super(name);
 	}
-
+	
+	//выстрел
 	public void shot() {
 		System.out.println("Bang!");
 	}
