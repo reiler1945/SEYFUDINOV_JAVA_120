@@ -12,7 +12,8 @@ public class MachineGun extends HotWeapon {
 	public MachineGun(String name) {
 		super(name);
 	}
-
+	
+	//выстрел
 	public void shot() {
 		System.out.println("TA-TA-TA-TA!");
 	}
