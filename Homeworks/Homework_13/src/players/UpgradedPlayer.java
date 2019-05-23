@@ -33,6 +33,9 @@ public class UpgradedPlayer extends Player {
     }
 
     public void setWeapon(Weapon weapon) {
+        //игрок берет оружие 
         this.weapon = weapon;
+        //назначаем владельца оружия
+        this.weapon.setOwner(this); 
     }
 }
