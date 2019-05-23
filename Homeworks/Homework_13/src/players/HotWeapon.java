@@ -9,7 +9,8 @@ public abstract class HotWeapon extends Weapon{
 
 	// количество патронов в магазине
 	protected int bulletsInMagazine;
-
+	
+	//наименование оружия
 	protected String name;
 
 	public HotWeapon(String name) {
