@@ -1,6 +1,6 @@
 package players;
 public abstract class SteelArm extends Weapon{
-    // нанести урон
+    // удар
     public int action() {
         System.out.println("Shu!");
         return 1;
