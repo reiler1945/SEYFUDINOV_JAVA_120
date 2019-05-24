@@ -4,6 +4,7 @@
 
 ### Сделать:
 * Searching in INET `Hot keys list` for Mac Os. 
+* Выяснить что такое `классы - маркеры`.
 
 * * * * * 
 
