@@ -1,12 +1,18 @@
 package players;
+import javafx.beans.Observable;
+
 import java.util.Arrays;
 
-public class Player {
+public class Player implements PlayerObservable{
+
     protected static final int DEFAULT_HIT_SCORE_VALUE = 1;
     protected static final int INITIAL_SCORE_VALUE = 0;
 
     protected String name;
     protected int score;
+
+    protected Enemy enemy;
+
     private double health;
 
     public Player(String name, double health) {
@@ -48,6 +54,20 @@ public class Player {
             this.health = 0d;
             System.err.println("The player " + getName() + "is dead!");
         }
+        notifyEnemy();
+    }
 
+    public void addObserver(Enemy enemy) {
+        this.enemy = enemy;
+    }
+
+    public void removeObserver() {
+        this.enemy = null;
+    }
+
+    public void notifyEnemy() {
+        if (enemy != null) {
+            enemy.handleEvent(this);
+        }
     }
 }

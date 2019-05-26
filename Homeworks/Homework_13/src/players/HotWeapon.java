@@ -42,10 +42,12 @@ public abstract class HotWeapon extends Weapon{
 			System.err.println("Magazine is not empty yet!");
 			return;
 		}
+
 		if (this.getOwner().getBulletsAmount() / maxBulletsInMagazine == 0) {
 			System.err.println("Not enough bullets amount!");
 			return;
 		}
+
 		if (this.getOwner().getBulletsAmount() / maxBulletsInMagazine > 0) {
 			bulletsInMagazine =+ maxBulletsInMagazine;
 			this.owner.setBulletsAmount(this.owner.getBulletsAmount() - maxBulletsInMagazine);
