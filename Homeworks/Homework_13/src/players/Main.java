@@ -3,10 +3,10 @@ package players;
 public class Main {
 
     public static void main(String[] args) {
-        Player marsel = new Player("Марсель", 100);
-        Player oleg = new Player("Олег", 100);
-        UpgradedPlayer nadir =  new UpgradedPlayer("Надир", 100);
-        UpgradedPlayer medved = new UpgradedPlayer("Медведь", 100);
+        Player marsel = new Player("Bob", 100);
+        Player oleg = new Player("John", 100);
+        UpgradedPlayer nadir =  new UpgradedPlayer("Max", 100);
+        UpgradedPlayer medved = new UpgradedPlayer("Alex", 100);
 
         Player[] playersArray = {marsel, oleg, nadir, medved};
 
@@ -18,7 +18,7 @@ public class Main {
 
         nadir.addWeapon(new MachineGun("MG-42"));
         HotWeapon nadirMG = (HotWeapon)nadir.getCurrentWeapon();
-        System.out.println("Name of class = " + nadir.getCurrentWeapon().getClass().getName());
+        //System.out.println("Name of class = " + nadir.getCurrentWeapon().getClass().getSimpleName());
         nadirMG.reload();
         nadir.hit(medved);
         nadir.removeWeapon(nadirMG);
