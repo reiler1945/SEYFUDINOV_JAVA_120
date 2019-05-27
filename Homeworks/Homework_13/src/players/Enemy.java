@@ -8,7 +8,7 @@ public class Enemy extends Player implements EnemyObserver {
 
     public void handleEvent(Player player) {
         if (player.getHealth() <= 30) {
-            player.removeObserver();
+            player.removeEnemy(this);
             this.hit(player);
         }
     }

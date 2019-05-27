@@ -1,7 +1,5 @@
 package players;
 
-import org.jetbrains.annotations.NotNull;
-
 public class UpgradedPlayer extends Player {
     private static final int INITIAL_BULLETS_AMOUNT = 20;
     private static final int MAX_WEAPON_COUNT = 5;
@@ -25,29 +23,26 @@ public class UpgradedPlayer extends Player {
 
     public void addWeapon(Weapon weapon) {
         if (weapon != null) {
-            this.weapons[currentWeaponCount++] = weapon;
-            weapon.setOwner(this);
-            this.setCurretWeapon(currentWeaponCount - 1);
+			int result = MyArraysUtil.addElement(weapons, weapon, currentWeaponCount);
+			if (result >= 0) {
+				currentWeaponCount = result;
+				weapon.setOwner(this);
+				this.setCurrentWeapon(currentWeaponCount - 1);
+			}	
         } else {
             System.err.println("Нет оружия!");
         }
     }
 
-    public void removeWeapon(int numWeapon) {
-        if ((numWeapon < currentWeaponCount) && (numWeapon >= 0)) {
-            for (int i = numWeapon; i < currentWeaponCount; i++) {
-                if (i == numWeapon) {
-                    this.weapons[i].setOwner(null);
-                }
-                weapons[i] = weapons[i + 1];
+    public void removeWeapon(Weapon weapon) {
+		int result = MyArraysUtil.removeElement(weapons, weapon, currentWeaponCount);
+		if (result >= 0) {
+			currentWeaponCount = result;
+			weapon.setOwner(null);
+			if (currentWeaponCount > 0) {
+                this.setCurrentWeapon(currentWeaponCount - 1);
             }
-            if (currentWeaponCount > 0) {
-                this.setCurretWeapon(numWeapon);
-            }
-            System.out.println("Выбросили оружие!");
-        } else {
-            System.err.println("Не удалось выбросить оружие!");
-        }
+		}	
     }
 
     public void hit(Player player) {
@@ -59,17 +54,21 @@ public class UpgradedPlayer extends Player {
         }
     }
 
-    public Weapon getCurretWeapon() {
+    public Weapon getCurrentWeapon() {
         return currentWeapon;
     }
 
-    public void setCurretWeapon(int numWeapon) {
+    public void setCurrentWeapon(int numWeapon) {
         if (weapons.length > 0 && numWeapon < weapons.length) {
             this.currentWeapon = weapons[numWeapon];
         } else {
-            System.err.println("Список оружия пуст или нет оружия с таким номером!");
+            System.err.println("Список оружия пуст или нет такого оружия!");
         }
     }
+	
+    public void setCurrentWeapon(Weapon weapon) {
+		setCurrentWeapon(MyArraysUtil.getIndex(weapons, weapon, currentWeaponCount));
+    }	
 
     public int getBulletsAmount() {
         return bulletsAmount;

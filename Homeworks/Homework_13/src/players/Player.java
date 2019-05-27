@@ -1,17 +1,20 @@
 package players;
-import javafx.beans.Observable;
 
 import java.util.Arrays;
 
-public class Player implements PlayerObservable{
+public class Player implements PlayerByEnemyObservable, StrategyContext{
 
     protected static final int DEFAULT_HIT_SCORE_VALUE = 1;
     protected static final int INITIAL_SCORE_VALUE = 0;
+	protected static final int MAX_ENEMIES = 5;
 
     protected String name;
     protected int score;
 
-    protected Enemy enemy;
+    Strategy strategy;
+
+    protected int currerntEnemyCount = 0;	
+    protected Enemy[] enemies;
 
     private double health;
 
@@ -19,6 +22,7 @@ public class Player implements PlayerObservable{
         this.name = name;
         this.health = health;
         this.score = INITIAL_SCORE_VALUE;
+		enemies = new Enemy[MAX_ENEMIES];
     }
 
     public void hit(Player player) {
@@ -54,20 +58,36 @@ public class Player implements PlayerObservable{
             this.health = 0d;
             System.err.println("The player " + getName() + "is dead!");
         }
-        notifyEnemy();
+        notifyEnemies();
     }
 
-    public void addObserver(Enemy enemy) {
-        this.enemy = enemy;
+    public void addEnemy(Enemy enemy) {
+		int result = MyArraysUtil.addElement(enemies, enemy, currerntEnemyCount);
+		if (result >= 0) {
+			currerntEnemyCount = result; 
+		}	
     }
 
-    public void removeObserver() {
-        this.enemy = null;
+    public void removeEnemy(Enemy enemy) {
+		int result = MyArraysUtil.removeElement(enemies, enemy, currerntEnemyCount);
+		if (result >= 0) {
+			currerntEnemyCount = result; 
+		}			
     }
 
-    public void notifyEnemy() {
-        if (enemy != null) {
-            enemy.handleEvent(this);
+    public void notifyEnemies() {
+        for (int i = 0; i < currerntEnemyCount; i++) {
+            enemies[i].handleEvent(this);
         }
+    }
+
+    public void executeStrategy() {
+        if (strategy != null) {
+            strategy.say();
+        }
+    };
+
+    public void setStrategy(Strategy strategy) {
+        this.strategy = strategy;
     }
 }

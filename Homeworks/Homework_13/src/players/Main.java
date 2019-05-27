@@ -1,21 +1,5 @@
-/*
-Задача:
-Ориентируясь на # 17. Inheritance, в частности иерархию Player-UpgradedPlayer реализовать:
-иерархиую оружия
-
-возможность добавления любого (из созданных) оружия в UpgradedPlayer
-
-Каждое оружие должно иметь урон
-
-Каждое оружие должно иметь бонус
-
-Создать класс Enemy, который наблюдает за игроком. Если у игрока меньше 30% жизни, то Enemy начинает на него нападать.
-(Сделать с помощью Observer).
-
-Применить паттерн Strategy в проекте с игроком, врагом и оружением.
-(попробовать применить для выбора метода атаки у Player)
-*/
 package players;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -33,11 +17,18 @@ public class Main {
         nadir.hit(marsel);
 
         nadir.addWeapon(new MachineGun("MG-42"));
-        HotWeapon nadirMG = (HotWeapon)nadir.getCurretWeapon();
-        System.out.println("Имя класса = " + nadir.getCurretWeapon().getClass().getName());
+        HotWeapon nadirMG = (HotWeapon)nadir.getCurrentWeapon();
+        System.out.println("Name of class = " + nadir.getCurrentWeapon().getClass().getName());
         nadirMG.reload();
         nadir.hit(medved);
-        nadir.removeWeapon(0);
+        nadir.removeWeapon(nadirMG);
+
+        //проверим вызов стратегий
+        nadir.setStrategy(new StrategyCryOut());
+        nadir.executeStrategy();
+        nadir.setStrategy(new StrategySilent());
+        nadir.executeStrategy();
+
         nadir.hit(medved);
         nadir.addWeapon(new Sword());
         
@@ -47,7 +38,7 @@ public class Main {
         
         //атакуем  
         oleg.hit(marsel);
-        oleg.addObserver(new Enemy());
+        oleg.addEnemy(new Enemy());
         while (oleg.getHealth() > 30) {
             nadir.hit(oleg);
         }

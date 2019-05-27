@@ -1,4 +1,5 @@
 package players;
+
 public class MachineGun extends HotWeapon {
 
 	// определим параметры класса оружия

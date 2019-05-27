@@ -1,4 +1,5 @@
 package players;
+
 public abstract class Weapon {
     
     //повреждение для врага

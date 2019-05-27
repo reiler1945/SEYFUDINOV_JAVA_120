@@ -1,4 +1,5 @@
 package players;
+
 public abstract class HotWeapon extends Weapon{
 
 	// максимальное количество патронов в магазине

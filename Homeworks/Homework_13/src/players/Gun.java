@@ -1,4 +1,5 @@
 package players;
+
 public class Gun extends HotWeapon {
 	// определим параметры класса оружия
 	static {
