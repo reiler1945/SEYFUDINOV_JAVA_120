@@ -56,6 +56,7 @@ class Program {
 	}
 	/*сортировка слиянием*/
 	//lo - low, mi - middle, hi = high	
+	//a - массив для упорядочивания, b - вспомогательный массив
 	public static void mergeSort(int[] a, int[] b, int lo, int hi) {
 		// если массив нулевой или единичной длины
 		if ((a.length <= 1) || (lo == hi)) {
