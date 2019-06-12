@@ -17,9 +17,6 @@ class MyScanner {
 		int beginPos = -1;
 		int endPos = -1;
 		int n = 0;
-		for (int i = 0; i < count; i++) {
-			System.out.println(bytes[i]);
-		}
         for (int i = 0; i < count; i++) {
 			ch = (char)bytes[i];
 			if (isCharSpaceOrEnter(ch) && (beginPos < 0)) {
@@ -39,11 +36,16 @@ class MyScanner {
 				}
 			} else {
 				if (endPos < 0) {
-					endPos = i;	
+					if (isCharSpaceOrEnter(ch)) {
+						endPos = i;
+					} else throw new IllegalArgumentException("Incorrect argument");
 				} else {
 					throw new IllegalArgumentException("Incorrect argument");
 				}	
 			}
+		}
+        if (beginPos < 0) {
+			throw new IllegalArgumentException("Incorrect argument");
 		}
 		int d = 1;
 		int result = 0;
