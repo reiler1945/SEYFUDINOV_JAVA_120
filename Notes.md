@@ -25,7 +25,7 @@
 * Какие ошибки проектирования мной были допущены в задаче 13?
 * Если у нас есть массив `ParentClass[]` экземпляров дочерних классов (`ChildClass1`, `ChildClass2`) класса `ParentClass`, причем у класса `ChildClass1` есть метод `run()`. Как вызвать метод при переборе элементов массива в цикле? Ответ: Это плохая практика, так лучше не делать.
 * Как работает интерпретатор? JVM построчно выполняет код?
-* Задание 17: "User UsersRepository.userByUserData(String userData)" в случае userData не по формату или же userData есть "null", то нужно ли
+* Задание 17: "User UsersRepository.userByDataArray(String userData[])" в случае userData не по формату или же userData есть "null", то нужно ли
   1. выбрасывать исключение
   2. возвращать null
 
