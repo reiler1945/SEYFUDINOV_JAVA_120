@@ -28,5 +28,6 @@
 * Задание 17: "User UsersRepository.userByDataArray(String userData[])" в случае userData не по формату или же userData есть "null", то нужно ли
   1. выбрасывать исключение
   2. возвращать null
+* Задание 18: "int IntegerLinkedList.get(int index)". index должен быть в диапазоне [0, size) или [1, size]? 
 
 * * * * *
