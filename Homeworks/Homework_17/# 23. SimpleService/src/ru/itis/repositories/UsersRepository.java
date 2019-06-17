@@ -27,22 +27,22 @@ public class UsersRepository {
         }
     }
 
-    public User findOneById(int id) {
+    public User findOneById(long id) {
         User user = null;
         try {
             Reader reader = new FileReader("Users.txt");
             BufferedReader bufferedReader = new BufferedReader(reader);
             String currentUserLine = bufferedReader.readLine();
-            String[] userData = currentUserLine.split(UsersRepository.SEPARATOR);
-            int currentId = Integer.parseInt(userData[0]);
+            String[] userData = null;
+            long currentId;
             while (currentUserLine != null) {
-                currentUserLine = bufferedReader.readLine();
                 userData = currentUserLine.split(UsersRepository.SEPARATOR);
-                currentId = Integer.parseInt(userData[0]);
+                currentId = Long.parseLong(userData[0]);
                 if (currentId == id) {
                     user = this.userByDataArray(userData);
                     break;
                 }
+                currentUserLine = bufferedReader.readLine();
             }
         } catch (IOException e) {
             throw new IllegalArgumentException();
@@ -53,7 +53,7 @@ public class UsersRepository {
     public User[] findAll() {
         // Создаем массив для результата
         // сюда положим пользователей
-        User users[] = new User[100];
+        User[] users = new User[100];
         try {
             // открываем файл для чтения
             Reader reader = new FileReader(fileName);
@@ -68,7 +68,7 @@ public class UsersRepository {
             int currentIndex = 0;
             // пока файл не кончился
             while (currentUserLine != null) {
-                String userDataArray[] = currentUserLine.split(UsersRepository.SEPARATOR);
+                String[] userDataArray = currentUserLine.split(UsersRepository.SEPARATOR);
                 User user = this.userByDataArray(userDataArray);
                 users[currentIndex] = user;
                 currentIndex++;
@@ -99,7 +99,7 @@ public class UsersRepository {
             User user = User.builder()
                     .login(login)
                     .password(password)
-                    .id(Integer.parseInt(idString))
+                    .id(Long.parseLong(idString))
                     .build();
 
             if (!firstName.equals("null")) {

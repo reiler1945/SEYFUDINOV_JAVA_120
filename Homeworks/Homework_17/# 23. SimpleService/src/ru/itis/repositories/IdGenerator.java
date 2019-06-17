@@ -16,7 +16,7 @@ public class IdGenerator {
         this.fileName = fileName;
     }
     // функция, генерирующая новый идентификатор
-    public int generate() {
+    public long generate() {
         try {
             // открываем файлс последним сгенерированным id
             InputStream input = new FileInputStream(fileName);
@@ -27,7 +27,7 @@ public class IdGenerator {
             // преобразуем данный набор в строку
             String idAsString = new String(bytes);
             // очищаем строку от мусора и конвертируем в число int
-            int lastGeneratedId = Integer.parseInt(idAsString.trim());
+            Long lastGeneratedId = Long.parseLong(idAsString.trim());
             // увеличиваем данное число на 1
             lastGeneratedId++;
             // закрываем файл для чтения

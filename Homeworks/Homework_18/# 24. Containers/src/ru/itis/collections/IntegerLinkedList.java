@@ -29,18 +29,23 @@ public class IntegerLinkedList implements IntegersList {
 
     @Override
     public void removeAt(int index) {
-        if ((index >= this.size) || (index < 0)) {
-            throw new IndexOutOfBoundsException();
-        } else {
+        if ((index >= 0) && (index < this.size)) {
             Node previousNode = null;
             Node currentNode = this.head;
             int currentIndex = 0;
-            while (currentIndex != index) {
-                previousNode = currentNode;
-                currentNode = currentNode.getNext();
-                currentIndex++;
+            if (index == 0) {
+                this.head = currentNode.getNext();
+            } else {
+                while (currentIndex != index) {
+                    previousNode = currentNode;
+                    currentNode = currentNode.getNext();
+                    currentIndex++;
+                }
+                previousNode.setNext(currentNode.getNext());
             }
-            previousNode.setNext(currentNode.getNext());
+            this.size--;
+        } else {
+            throw new IndexOutOfBoundsException();
         }
     }
 
@@ -80,11 +85,18 @@ public class IntegerLinkedList implements IntegersList {
         while (currentNode != null) {
             int currentElement = currentNode.getValue();
             if (element == currentElement) {
-                previousNode.setNext(currentNode.getNext());
-                break;
+                if (previousNode == null) {
+                    this.head = currentNode.getNext();
+                    currentNode = this.head;
+                } else {
+                    previousNode.setNext(currentNode.getNext());
+                    currentNode = currentNode.getNext();
+                }
+                this.size--;
+            } else {
+                previousNode = currentNode;
+                currentNode = currentNode.getNext();
             }
-            previousNode = currentNode;
-            currentNode = currentNode.getNext();
         }
     }
 
@@ -96,7 +108,7 @@ public class IntegerLinkedList implements IntegersList {
     @Override
     public String toString() {
         Node currentNode = this.head;
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         while (currentNode != null) {
             result.append(currentNode.getValue() + " -> ");
             currentNode = currentNode.getNext();

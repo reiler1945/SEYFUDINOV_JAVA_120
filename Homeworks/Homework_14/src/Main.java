@@ -1,5 +1,5 @@
 /*
-http://macmy.ru/uploads/posts/2015-01/1420524440_3567.jpg
+https://avatars.mds.yandex.net/get-yabs_performance/1906317/2a0000016b0bb578ce24c19c3ed66f4ee7e0/huge
 /Users/reiler/Desktop/SEYFUDINOV_JAVA_120/Homeworks/Homework_14
  */
 
@@ -11,7 +11,7 @@ class Main {
         byte bytes[] = new byte[1024 * 1024 * 5]; //5 Mb
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the url address:");
-        String url = scanner.nextLine();
+        String url = scanner.nextLine();//Line();
         //url = "http://macmy.ru/uploads/posts/2015-01/1420524440_3567.jpg";
         System.out.println("Enter the save folder address:");
         String folder = scanner.nextLine();
