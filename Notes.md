@@ -37,10 +37,7 @@
 * Задание 18: "int IntegerLinkedList.get(int index)". index должен быть в диапазоне [0, size) или [1, size]? `Ответ: [0, size)`
 * Кто и какие методы ресурсы использует для разработки дизайна сайта?
 #### 18.06.2019:
-* Задание 17 
-```JAVA
-public User findOneById(long id) {...}
-```
-не стал делать `Long id`, ибо null быть не должно при поиске в репозиторие
+* 17. `SimpleService`: `public User findOneById(long id) {...}` не стал делать `Long id`, ибо `id` null быть не должно при поиске в репозиторие
+*
 
 * * * * *
