@@ -38,6 +38,7 @@
 * Кто и какие методы ресурсы использует для разработки дизайна сайта?
 #### 18.06.2019:
 * 17: `SimpleService`: `public User findOneById(long id) {...}` не стал делать `Long id`, ибо `id` null быть не должно при поиске в репозиторие
-*
+* 18: `IntegerLinkedList` : как правило `void remove(int element)` должен удалять все элементы в листе равные `element`?
+* 18: `IntegerLinkedList` : `Intellej Idea` замечение в по `StringBuilder` в `toString`?
 
 * * * * *
