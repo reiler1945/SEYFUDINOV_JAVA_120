@@ -39,6 +39,7 @@
 #### 18.06.2019:
 * 18: `IntegerLinkedList` : как правило `void remove(int element)` должен удалять все элементы в листе равные `element`?
 * 18: `IntegerLinkedList` : `Intellej Idea` замечение в по `StringBuilder` в `toString`?
-* 20: `SimpleService`: `public User findOneById(long id) {...}` не стал делать `Long id`, ибо `id` null быть не должно при поиске в репозиторие
+* 20: `SimpleService`: `public User findOneById(long id) {...}` не стал делать `Long id`, ибо `id` null быть не должно при поиске в репозиторие, сделал по принципу `только там, где возможно значение NULL`
+* 21: `LinkedList с генериком`: обсудить замечания от `Intellej Idea`и корректность реализации в целом. 
 
 * * * * *
