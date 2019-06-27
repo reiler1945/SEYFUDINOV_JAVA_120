@@ -110,7 +110,7 @@ public class IntegerLinkedList implements IntegersList {
         Node currentNode = this.head;
         StringBuilder result = new StringBuilder();
         while (currentNode != null) {
-            result.append(currentNode.getValue() + " -> ");
+            result.append(currentNode.getValue()).append( " -> ");
             currentNode = currentNode.getNext();
         }
         result.append("null");

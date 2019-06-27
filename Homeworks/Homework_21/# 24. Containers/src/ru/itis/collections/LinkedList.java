@@ -16,20 +16,20 @@ public class LinkedList <T> {
             throw new IndexOutOfBoundsException();
         } else {
             int currentIndex = 0;
-            Node currentNode = this.head;
+            Node<T> currentNode = this.head;
             while (currentIndex != index) {
                 currentNode = currentNode.getNext();
                 currentIndex++;
             }
-            element = (T) currentNode.getValue();
+            element = currentNode.getValue();
         }
         return element;
     }
 
     public void removeAt(int index) {
         if ((index >= 0) && (index < this.size)) {
-            Node previousNode = null;
-            Node currentNode = this.head;
+            Node<T> previousNode = null;
+            Node<T> currentNode = this.head;
             int currentIndex = 0;
             if (index == 0) {
                 this.head = currentNode.getNext();
@@ -48,7 +48,7 @@ public class LinkedList <T> {
     }
 
     public void add(T element) {
-        Node newNode = new Node(element);
+        Node <T> newNode = new Node<>(element);
 
         if (this.head == null) {
             this.head = newNode;
@@ -62,7 +62,7 @@ public class LinkedList <T> {
 
     public boolean exists(T element) {
         boolean result = false;
-        Node currentNode = this.head;
+        Node <T> currentNode = this.head;
         while (currentNode != null) {
             T currentElement = (T) currentNode.getValue();
             if (element.equals(currentElement)) {
@@ -75,10 +75,10 @@ public class LinkedList <T> {
     }
 
     public void remove(T element) {
-        Node previousNode = null;
-        Node currentNode = this.head;
+        Node<T> previousNode = null;
+        Node<T> currentNode = this.head;
         while (currentNode != null) {
-            T currentElement = (T) currentNode.getValue();
+            T currentElement = currentNode.getValue();
             if (element.equals(currentElement)) {
                 if (previousNode == null) {
                     this.head = currentNode.getNext();
@@ -101,7 +101,7 @@ public class LinkedList <T> {
 
     @Override
     public String toString() {
-        Node currentNode = this.head;
+        Node<T> currentNode = this.head;
         StringBuilder result = new StringBuilder();
         while (currentNode != null) {
             result.append(currentNode.getValue() + " -> ");
