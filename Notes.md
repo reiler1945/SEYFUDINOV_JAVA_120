@@ -50,5 +50,9 @@
 и как использовать конструктор в этом случае, если параметризованный, т.е. Collection<T>?
 * как построить диаграммму Collection, Map в Intellij Idea с методами?
 * Почему для String не используем Optional?https://github.com/MarselSidikov/JavaItis10/blob/master/Projects/%23%2035.%20SimpleService%20Extended/src/main/java/ru/itis/service/repositories/UsersRepositoryFileBasedImpl.java   
+* Задание 25: кривой класс "UsersService"  
+* Задание 25: Имеет ли смысл обертывать "Optional" метод public List<User> findAll()
+* Неужели нельзя подменить исходники, к примеру String?
+  
 
 * * * * *
