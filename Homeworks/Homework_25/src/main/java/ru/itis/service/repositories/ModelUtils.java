@@ -11,6 +11,7 @@ public class ModelUtils {
         for (T element: target) {
             if (predicate.test(element)) {
                 result.add(element);
+                return result;
             }
         }
         return result;
