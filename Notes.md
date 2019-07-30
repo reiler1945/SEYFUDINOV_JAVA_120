@@ -55,6 +55,6 @@
 * Неужели нельзя подменить исходники, к примеру String?
 #### 30.07.2019:  
 * На примере `# 47. SpringMvc Example` можем ли мы перенести `<context:component-scan base-package="ru.itis.web"/>` из `dispatcherServlet-servlet.xml` в `AppConfig.java`?
-  
+* Когда рекомендуется создавать корзину: в момент добавки товара в нее или же при регистрации клиента в системе?   
 
 * * * * *
