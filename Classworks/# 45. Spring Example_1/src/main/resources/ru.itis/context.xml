@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="prefixUtils1" class="ru.itis.spring.CustomTextPrefixUtilsImpl">
+        <constructor-arg name="renderer" ref="messageRenderer"/>
+        <property name="prefix" value="NAIL"/>
+    </bean>
+
+    <bean id="prefixUtils2" class="ru.itis.spring.CustomTextPrefixPostfixUtilsImpl">
+        <constructor-arg name="renderer" ref="messageRenderer"/>
+        <property name="prefix" value="NAIL"/>
+        <property name="postfix" value="SEIFUDINOV"/>
+    </bean>
+
+    <bean id="messageRenderer" class="ru.itis.spring.MessageRendererStandardImpl"/>
+</beans>

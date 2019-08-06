@@ -6,6 +6,7 @@ import ru.itis.service.repositories.CrudRepository;
 import ru.itis.service.repositories.UsersRepository;
 import ru.itis.service.exceptions.*;
 import ru.itis.service.repositories.UsersRepositoryFileBasedImpl;
+import java.util.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +24,6 @@ public class MainUsersRepositoryFileBasedImpl {
 
     public static void main(String[] args) {
         UsersRepository usersRepository = new UsersRepositoryFileBasedImpl("users.txt");
-
         printUserList(usersRepository);
 
         Optional<User> userOptional = usersRepository.findOneById(1L);
@@ -72,5 +72,12 @@ public class MainUsersRepositoryFileBasedImpl {
         usersRepository.delete(newUser.getId());
 
         printUserList(usersRepository);
+
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("1", 1);
+        map.put("2", 2);
+        map.put("3", 3);
+        map.put("4", 4);
+        List<Integer> list = new ArrayList<>(map.values());
     }
 }

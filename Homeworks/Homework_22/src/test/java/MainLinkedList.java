@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class MainLinkedList {
     public static void main(String[] args) {
         List<String> linkedList = new LinkedList<>();
