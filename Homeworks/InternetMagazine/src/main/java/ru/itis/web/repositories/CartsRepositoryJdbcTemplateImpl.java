@@ -37,14 +37,12 @@ public class CartsRepositoryJdbcTemplateImpl implements CartsRepository {
                     "    and fill_carts.cart_id = ?;";
 
     //language=SQL
-    private static final String SQL_FIND_ALL =
-            "select arts.*, su.id, su.*, carts.cart_id, row_number() over (partition by carts.cart_id order by 1) rownum\n" +
-                    "                    from service_user su, carts, fill_carts, articles arts\n" +
-                    "                        where su.id = carts.user_id\n" +
-                    "                          and carts.cart_id = fill_carts.cart_id\n" +
-                    "                          and fill_carts.article_id = arts.article_id\n" +
-                    "                     order by carts.cart_id, rownum desc";
-
+    private static final String SQL_FIND_ALL = "select arts.*, su.id, su.*, carts.cart_id, row_number() over (partition by carts.cart_id order by 1) rownum\n" +
+            "                                        from service_user su left join carts on su.id = carts.user_id\n" +
+            "                                             left join fill_carts on carts.cart_id = fill_carts.cart_id\n" +
+            "                                             left join articles arts on fill_carts.article_id = arts.article_id\n" +
+            "                                         order by carts.cart_id, rownum desc;";
+    
     //language=SQL
     private static final String SQL_INSERT_CART = "insert into carts(user_id) values (?)";
 
@@ -79,7 +77,11 @@ public class CartsRepositoryJdbcTemplateImpl implements CartsRepository {
                         .build();
 
             }
-            articleList.add(ArticleRepositoryJdbcTemplateImpl.articleRowMapper.mapRow(row, rowNumber));
+
+            row.getLong("article_id");
+            if (!row.wasNull()) {
+                articleList.add(ArticleRepositoryJdbcTemplateImpl.articleRowMapper.mapRow(row, rowNumber));
+            }
             if (row.getInt("rownum") == 1) {
                 break;
             }
@@ -147,7 +149,7 @@ public class CartsRepositoryJdbcTemplateImpl implements CartsRepository {
 
     @Override
     public List<Cart> findAll() {
-        return jdbcTemplate. query(SQL_FIND_ALL, cartRowMapper);
+        return jdbcTemplate.query(SQL_FIND_ALL, cartRowMapper);
     }
 
 

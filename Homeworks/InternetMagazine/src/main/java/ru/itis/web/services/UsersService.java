@@ -12,4 +12,5 @@ public interface UsersService {
     Optional<String> signIn(SignInForm form);
     Optional<UserDto> getUserByCookie(String cookie);
     List<UserDto> getAllUsers();
+    List<UserDto> getAllUsersByPage(int pageId, int siteCount);
 }

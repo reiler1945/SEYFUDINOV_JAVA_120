@@ -3,8 +3,10 @@ package ru.itis.web.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.itis.web.dto.CartDto;
 import ru.itis.web.dto.UserDto;
@@ -35,5 +37,12 @@ public class UsersController {
         List<CartDto> cartDtos = cartsService.getAllCarts();
         model.addAttribute("cartDtos", cartDtos);
         return "usersCarts";
+    }
+
+    @RequestMapping(value = "/users/{pageId}", method = RequestMethod.GET)
+    public String getUsersByPage(Model model, @PathVariable int pageId, @RequestParam int site) {
+        List<UserDto> users = usersService.getAllUsersByPage(pageId, site);
+        model.addAttribute("users", users);
+        return "usersPages";
     }
 }

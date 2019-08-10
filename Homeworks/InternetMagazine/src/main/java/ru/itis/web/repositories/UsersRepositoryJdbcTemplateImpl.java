@@ -26,6 +26,9 @@ public class UsersRepositoryJdbcTemplateImpl implements UsersRepository {
     private final static String SQL_SELECT_ALL = "select * from service_user";
 
     //language=SQL
+    private final static String SQL_SELECT_ALL_PAGES = "select * from service_user order by id offset ? limit ?";
+
+    //language=SQL
     private final static String SQL_SELECT_ONE_BY_LOGIN = "select * from service_user where login = ?";
 
     @Autowired
@@ -88,5 +91,10 @@ public class UsersRepositoryJdbcTemplateImpl implements UsersRepository {
     @Override
     public List<User> findAll() {
         return jdbcTemplate.query(SQL_SELECT_ALL, userRowMapper);
+    }
+
+    @Override
+    public List<User> findAllByPage(int pageId, int siteCount) {
+        return jdbcTemplate.query(SQL_SELECT_ALL_PAGES, userRowMapper, pageId, siteCount);
     }
 }

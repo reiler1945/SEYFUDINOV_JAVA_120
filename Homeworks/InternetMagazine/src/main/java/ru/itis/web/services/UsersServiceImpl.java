@@ -3,13 +3,11 @@ package ru.itis.web.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import ru.itis.web.dto.ArticleDto;
 import ru.itis.web.dto.SignInForm;
 import ru.itis.web.dto.SignUpForm;
 import ru.itis.web.dto.UserDto;
-import ru.itis.web.models.Cart;
-import ru.itis.web.models.CookieValue;
-import ru.itis.web.models.User;
-import ru.itis.web.models.UserRole;
+import ru.itis.web.models.*;
 import ru.itis.web.repositories.CartsRepository;
 import ru.itis.web.repositories.CookieValuesRepository;
 import ru.itis.web.repositories.UsersRepository;
@@ -18,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 public class UsersServiceImpl implements UsersService {
@@ -102,5 +102,19 @@ public class UsersServiceImpl implements UsersService {
             result.add(userDto);
         }
         return result;
+    }
+
+    @Override
+    public List<UserDto> getAllUsersByPage(int pageId, int siteCount) {
+        List<User> users = usersRepository.findAllByPage(pageId, siteCount);
+        Stream<User> userStream = users.stream();
+        Stream<UserDto> userDtoStream = userStream
+                .map(user -> UserDto.builder()
+                        .id(user.getId())
+                        .firstName(user.getFirstName())
+                        .lastName(user.getLastName())
+                        .role(user.getRole().toString())
+                        .build());
+        return userDtoStream.collect(Collectors.toList());
     }
 }
