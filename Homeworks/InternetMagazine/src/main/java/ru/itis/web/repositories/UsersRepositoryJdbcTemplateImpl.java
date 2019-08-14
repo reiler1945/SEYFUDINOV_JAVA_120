@@ -26,7 +26,10 @@ public class UsersRepositoryJdbcTemplateImpl implements UsersRepository {
     private final static String SQL_SELECT_ALL = "select * from service_user";
 
     //language=SQL
-    private final static String SQL_SELECT_ALL_PAGES = "select * from service_user order by id offset ? limit ?";
+    private final static String SQL_SELECT_ALL_PAGES = "select * from service_user order by id limit ? offset ?";
+
+    //language=SQL
+    private final static String SQL_COUNT_USERS = "select count(*) row_count from service_user";
 
     //language=SQL
     private final static String SQL_SELECT_ONE_BY_LOGIN = "select * from service_user where login = ?";
@@ -66,7 +69,7 @@ public class UsersRepositoryJdbcTemplateImpl implements UsersRepository {
         jdbcTemplate.update(con -> {
             PreparedStatement statement = con.prepareStatement(SQL_INSERT_USER, new String[]{"id"});
             statement.setString(1, model.getFirstName());
-            statement.setString(2, model.getLastName());
+            statement.setString( 2, model.getLastName());
             statement.setString(3, model.getEmail());
             statement.setString(4, model.getLogin());
             statement.setString(5, model.getPassword());
@@ -94,7 +97,13 @@ public class UsersRepositoryJdbcTemplateImpl implements UsersRepository {
     }
 
     @Override
-    public List<User> findAllByPage(int pageId, int siteCount) {
-        return jdbcTemplate.query(SQL_SELECT_ALL_PAGES, userRowMapper, pageId, siteCount);
+    public List<User> findAllByPage(int pageSize, int pageNum) {
+        int offset = pageSize * (pageNum - 1);
+        return jdbcTemplate.query(SQL_SELECT_ALL_PAGES, userRowMapper, pageSize, offset);
+    }
+
+    @Override
+    public Integer getCountUsers() {
+        return jdbcTemplate.queryForObject(SQL_COUNT_USERS, Integer.class);
     }
 }

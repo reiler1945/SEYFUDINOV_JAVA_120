@@ -2,8 +2,6 @@ package ru.itis.web.repositories;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -12,11 +10,9 @@ import ru.itis.web.models.Article;
 import ru.itis.web.models.Cart;
 import ru.itis.web.models.User;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,12 +33,11 @@ public class CartsRepositoryJdbcTemplateImpl implements CartsRepository {
                     "    and fill_carts.cart_id = ?;";
 
     //language=SQL
-    private static final String SQL_FIND_ALL = "select arts.*, su.id, su.*, carts.cart_id, row_number() over (partition by carts.cart_id order by 1) rownum\n" +
+    private static final String SQL_FIND_ALL = "select arts.*, su.id, su.*, carts.cart_id\n" +
             "                                        from service_user su left join carts on su.id = carts.user_id\n" +
             "                                             left join fill_carts on carts.cart_id = fill_carts.cart_id\n" +
-            "                                             left join articles arts on fill_carts.article_id = arts.article_id\n" +
-            "                                         order by carts.cart_id, rownum desc;";
-    
+            "                                             left join articles arts on fill_carts.article_id = arts.article_id";
+
     //language=SQL
     private static final String SQL_INSERT_CART = "insert into carts(user_id) values (?)";
 
@@ -61,32 +56,27 @@ public class CartsRepositoryJdbcTemplateImpl implements CartsRepository {
     //language=SQL
     private static final String SQL_CART_ID_BY_USER = "select cart_id from carts where user_id = ?";
 
-    static RowMapper<Cart> cartRowMapper = (row, rowNumber) -> {
-
-        Cart cart = null;
-        List <Article> articleList = new ArrayList<>();
-        Long cartIdCurr;
-        //row.setFetchDirection(ResultSet.TYPE_SCROLL_INSENSITIVE);// чтобы можно было использовать row.previous()
+    private RowMapper<List<Cart>> cartsRowMapper = (row, rowNumber) -> {
+        HashMap<Long, Cart> cartMap = new HashMap<>();
         do {
-            cartIdCurr = row.getLong("cart_id");
-            if (!row.wasNull() && (cart == null)) {
-                cart = Cart.builder()
-                        .user(UsersRepositoryJdbcTemplateImpl.userRowMapper.mapRow(row, rowNumber))
-                        .Id(cartIdCurr)
-                        .articles(articleList)
-                        .build();
-
-            }
-
-            row.getLong("article_id");
+            Long cartId = row.getLong("cart_id");
             if (!row.wasNull()) {
-                articleList.add(ArticleRepositoryJdbcTemplateImpl.articleRowMapper.mapRow(row, rowNumber));
-            }
-            if (row.getInt("rownum") == 1) {
-                break;
+                if (!cartMap.containsKey(cartId)) {
+                    User user = UsersRepositoryJdbcTemplateImpl.userRowMapper.mapRow(row, rowNumber);
+                    cartMap.put(cartId, Cart.builder()
+                                        .Id(cartId)
+                                        .articles(new ArrayList<>())
+                                        .user(user)
+                                        .build());
+                }
+                row.getLong("article_id");
+                if (!row.wasNull()) {
+                    Article article = ArticleRepositoryJdbcTemplateImpl.articleRowMapper.mapRow(row, rowNumber);
+                    cartMap.get(cartId).getArticles().add(article);
+                }
             }
         } while (row.next());
-        return cart;
+        return new ArrayList<>(cartMap.values());
     };
 
     @Autowired
@@ -149,7 +139,7 @@ public class CartsRepositoryJdbcTemplateImpl implements CartsRepository {
 
     @Override
     public List<Cart> findAll() {
-        return jdbcTemplate.query(SQL_FIND_ALL, cartRowMapper);
+        return jdbcTemplate.queryForObject(SQL_FIND_ALL, cartsRowMapper);
     }
 
 

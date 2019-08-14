@@ -24,10 +24,10 @@ public class AppConfig implements WebMvcConfigurer {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/magazine");
+        dataSource.setUrl("jdbc:postgresql://37.228.116.168:5421/magazine");
         dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setUsername("postgres");
-        dataSource.setPassword("6181");
+        dataSource.setPassword("aBWyfDQ02X");
         return dataSource;
     }
 
@@ -70,7 +70,10 @@ public class AppConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
-                .addResourceHandler("/js/**")
-                .addResourceLocations("static/js/");
+                .addResourceHandler("/js/**", "/css/**")
+                .addResourceLocations("static/js/", "static/css/");
+//        registry
+//                .addResourceHandler("/css/**")
+//                .addResourceLocations("static/css/");
     }
 }

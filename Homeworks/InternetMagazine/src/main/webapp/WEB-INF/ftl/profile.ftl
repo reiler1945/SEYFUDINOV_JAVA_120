@@ -16,6 +16,7 @@
         <tr><td><a href="/articles">В магазин</a></td></tr>
         <tr><td><a href="/users">Пользователи</a></td></tr>
         <tr><td><a href="/users/carts">Все товары в корзине по всем пользователям</a></td></tr>
+        <tr><td><a href="/users/3">Пользователи (pagination)</a></td></tr>
         <tr><td><a href="/logout">logout</a></tr>
     </table>
 </div>

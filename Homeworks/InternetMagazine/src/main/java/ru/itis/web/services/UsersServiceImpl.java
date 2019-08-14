@@ -105,8 +105,8 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public List<UserDto> getAllUsersByPage(int pageId, int siteCount) {
-        List<User> users = usersRepository.findAllByPage(pageId, siteCount);
+    public List<UserDto> getAllUsersByPage(int pageSize, int pageNum) {
+        List<User> users = usersRepository.findAllByPage(pageSize, pageNum);
         Stream<User> userStream = users.stream();
         Stream<UserDto> userDtoStream = userStream
                 .map(user -> UserDto.builder()
@@ -116,5 +116,10 @@ public class UsersServiceImpl implements UsersService {
                         .role(user.getRole().toString())
                         .build());
         return userDtoStream.collect(Collectors.toList());
+    }
+
+    @Override
+    public Integer getCountUsers() {
+        return usersRepository.getCountUsers();
     }
 }
