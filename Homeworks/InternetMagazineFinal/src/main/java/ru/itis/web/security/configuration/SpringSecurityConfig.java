@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,6 +14,7 @@ import org.springframework.security.web.authentication.rememberme.JdbcTokenRepos
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -42,10 +42,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         // должны пройти через механизм авторизации
         http.authorizeRequests()
                 .antMatchers("/users/**").authenticated()
-                .antMatchers(HttpMethod.POST, "/cars/**").hasAuthority("ADMIN")
-                .antMatchers("/cars/**").authenticated()
+                //.antMatchers(HttpMethod.POST, "/cart/").hasAuthority("ADMIN")
+                .antMatchers("/cart/**").authenticated()
+                .antMatchers("/articles/**").authenticated()
                 .antMatchers("/profile/**").authenticated()
-                .antMatchers("/email/confirm").permitAll()
+                .antMatchers("/pay/**").authenticated()
                 .antMatchers("/signUp/**").permitAll()
                 .antMatchers("/").permitAll()
                 .and()
@@ -55,6 +56,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/signIn?error")
                 .usernameParameter("login")
                 .permitAll()
+                .and()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/signIn").deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true)
                 .and()
                 .rememberMe()
                 .rememberMeParameter("remember-me")
