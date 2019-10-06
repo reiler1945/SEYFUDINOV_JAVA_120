@@ -3,6 +3,7 @@ package ru.itis.web.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import ru.itis.web.dto.SignInForm;
 import ru.itis.web.dto.SignUpForm;
 import ru.itis.web.dto.UserDto;
@@ -37,6 +38,7 @@ public class UsersServiceImpl implements UsersService {
     private PasswordEncoder passwordEncoder;
 
     @Override
+    @Transactional
     public void signUp(SignUpForm form) {
         User user = User.builder()
                 .password(passwordEncoder.encode(form.getPassword()))

@@ -43,6 +43,15 @@
         </tr>
     </#list>
 </table>
+<#if user.role == 'ADMIN'>
+    <div id = "addBlock">
+        <input type="text" name="name" placeholder="Product name" id = "name">
+        <br>
+        <input type="number" name="price" placeholder="price" id = "price">
+        <br>
+        <input type="button" value=Add onclick="addArticle('${_csrf.token}', $('#name').val(), $('#price').val(), ${user.cartId})"/>
+    </div>
+</#if>
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </body>
 </html>

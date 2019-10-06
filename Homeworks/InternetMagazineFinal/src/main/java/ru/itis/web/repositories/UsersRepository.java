@@ -13,7 +13,7 @@ public interface UsersRepository extends JpaRepository<User, Long> {
     Optional<User> findByLogin(String login);
 
     @Query(nativeQuery = true, value = "select * from service_user order by id limit :limit_ offset :offset_")
-    List<User> findAllByPage(@Param("limit_") int pageId, @Param("offset_") int siteCount);
+    List<User> findAllByPage(@Param("limit_") long limit, @Param("offset_") long offset);
 
     @Query(nativeQuery = true, value = "select count(*) from service_user")
     Integer getCountUsers();

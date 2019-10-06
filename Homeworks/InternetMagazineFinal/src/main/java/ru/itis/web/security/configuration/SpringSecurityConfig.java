@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -42,9 +43,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         // должны пройти через механизм авторизации
         http.authorizeRequests()
                 .antMatchers("/users/**").authenticated()
-                //.antMatchers(HttpMethod.POST, "/cart/").hasAuthority("ADMIN")
                 .antMatchers("/cart/**").authenticated()
+                .antMatchers("/chat/**").authenticated()
+                .antMatchers("/articles/add").authenticated()
+                .antMatchers("/articles/add").hasAuthority("ADMIN")
                 .antMatchers("/articles/**").authenticated()
+                //.antMatchers(HttpMethod.POST, "/articles/add").hasAuthority("ADMIN")
                 .antMatchers("/profile/**").authenticated()
                 .antMatchers("/pay/**").authenticated()
                 .antMatchers("/signUp/**").permitAll()

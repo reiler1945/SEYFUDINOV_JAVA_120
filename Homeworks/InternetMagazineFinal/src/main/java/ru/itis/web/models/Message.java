@@ -12,12 +12,12 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "articles")
-public class Article {
+@Table(name = "messages")
+public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long Id;
-    @Column(length = 128, unique = true)
-    String name;
-    Double price;
+    @Column(name = "user_id")
+    Long userId;
+    private String message;
 }

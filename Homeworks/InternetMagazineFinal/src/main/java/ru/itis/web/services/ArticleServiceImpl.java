@@ -2,6 +2,7 @@ package ru.itis.web.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import ru.itis.web.dto.ArticleDto;
 import ru.itis.web.models.Article;
 import ru.itis.web.repositories.ArticleRepository;
@@ -44,8 +45,14 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @Transactional
     public Article addArticle(ArticleDto articleForm) {
-        return null;
+        Article article = Article.builder()
+                .name(articleForm.getName())
+                .price(articleForm.getPrice())
+                .build();
+        articleRepository.save(article);
+        return article;
     }
 
     @Override

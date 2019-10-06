@@ -37,15 +37,18 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/users/carts", method = RequestMethod.GET)
-    public String getUsersCartsPage(Model model) {
+    public String getUsersCartsPage(@AuthenticationPrincipal UserDetailsImpl user, Model model) {
+        model.addAttribute("user", authenticationUtil.getUserByUserDetails(user));
         List<CartDto> cartDtos = cartsService.getAllCarts();
         model.addAttribute("cartDtos", cartDtos);
         return "usersCarts";
     }
 
-    @RequestMapping(value = "/users/{pageSize}", method = RequestMethod.GET)
-    public String getUsersByPage(Model model, @PathVariable int pageSize, @RequestParam(defaultValue = "1") int pageNum) {
-        List<UserDto> users = usersService.getAllUsersByPage(pageSize, pageNum);
+    @RequestMapping(value = "/users/pages", method = RequestMethod.GET)
+    public String getUsersByPage(@AuthenticationPrincipal UserDetailsImpl user, Model model, @RequestParam int pageSize, @RequestParam(defaultValue = "1") int pageNum) {
+        model.addAttribute("user", authenticationUtil.getUserByUserDetails(user));
+        int offset = pageSize * (pageNum - 1);
+        List<UserDto> users = usersService.getAllUsersByPage(pageSize, offset);
         Integer rowCount = usersService.getCountUsers();
         Integer pageCount = rowCount / pageSize;
         if (rowCount % pageSize > 0) {

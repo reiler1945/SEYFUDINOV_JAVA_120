@@ -1,10 +1,13 @@
 ### Заметки:
 * server: 
-port 12
+5.53.125.54
+port 22
 root
-4aw6fd7c3y
+ewhvz9q7hr
+
 developer
 weCqQwbHP9
+
 postgres
 aBWyfDQ02X
 port 5421
