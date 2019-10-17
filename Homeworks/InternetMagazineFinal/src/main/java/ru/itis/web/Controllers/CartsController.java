@@ -26,8 +26,8 @@ public class CartsController {
     public String getArticlesPage(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         UserDto user = authenticationUtil.getUserByUserDetails(userDetails);
         Long cartId = cartsService.getCartIdByUserId(user.getId());
+        user.setCartId(cartsService.getCartIdByUserId(user.getId()));
         model.addAttribute("user", user);
-        model.addAttribute("cartId", cartId);
         model.addAttribute("cartArticlesCount", cartsService.getCountArticlesByCartId(cartId));
         model.addAttribute("cartArticlesSum", cartsService.getSumArticlesByCartId(cartId));
         List<CartArticleDto> articles = cartsService.getArticlesByCartId(cartId);

@@ -49,13 +49,13 @@ public class CartsServiceImpl implements CartsService {
     }
 
     @Override
-    public Integer getCountArticlesByCartId(Long carId) {
-        return cartsRepository.getCountArticlesByCartId(carId);
+    public Integer getCountArticlesByCartId(Long cartId) {
+        return cartsRepository.getCountArticlesByCartId(cartId);
     }
 
     @Override
-    public Float getSumArticlesByCartId(Long carId) {
-        return cartsRepository.getSumArticlesByCartId(carId);
+    public Float getSumArticlesByCartId(Long cartId) {
+        return cartsRepository.getSumArticlesByCartId(cartId);
     }
 
     @Override

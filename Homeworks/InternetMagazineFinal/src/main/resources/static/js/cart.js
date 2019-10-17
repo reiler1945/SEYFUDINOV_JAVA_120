@@ -5,7 +5,8 @@ function deleteArticleFromCart(csrf, cartId, articleId) {
         "articleId": articleId
     };
     const reload = function (response) {
-        let cartHtml = document.getElementById('articles-list');
+        let cartHtml = document.getElementById('cart');
+        cartHtml["innerHTML"] = '<a class="nav-link" href="/cart?cartId='+ cartId + '" > Корзина(' + response.length + ') </a>';
 
         let articlesListHtml = document.getElementById('articles-list');
         // создаем новую HTML-ку с новым списком

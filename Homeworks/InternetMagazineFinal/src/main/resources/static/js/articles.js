@@ -6,7 +6,7 @@ function addArticleToCart(csrf, cartId, articleId) {
     };
     const reload = function (response) {
         let cartHtml = document.getElementById('cart');
-        cartHtml["innerHTML"] = '<a href="/cart?cartId='+ cartId + '" > Корзина(' + response + ') </a>';
+        cartHtml["innerHTML"] = '<a class="nav-link" href="/cart?cartId='+ cartId + '" > Корзина(' + response + ') </a>';
     };
     $.ajax({
         url: '/cart',
