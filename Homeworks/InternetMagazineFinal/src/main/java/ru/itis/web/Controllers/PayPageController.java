@@ -24,6 +24,7 @@ public class PayPageController {
     public String getArticlesPage(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         UserDto user = authenticationUtil.getUserByUserDetails(userDetails);
         Long cartId = cartsService.getCartIdByUserId(user.getId());
+        user.setCartId(cartsService.getCartIdByUserId(user.getId()));
         model.addAttribute("cartId", cartId);
         model.addAttribute("user", user);
         model.addAttribute("cartArticlesCount", cartsService.getCountArticlesByCartId(cartId));

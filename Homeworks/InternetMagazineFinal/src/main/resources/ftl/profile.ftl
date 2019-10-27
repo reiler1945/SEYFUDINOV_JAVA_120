@@ -1,24 +1,37 @@
 <html>
 <head>
     <title>Profile</title>
-    <#include "template1.ftl">
-    <#include "template3.ftl">
+    <#include "navTemplate1.ftl">
+    <#include "navTemplate3.ftl">
 </head>
 <body>
-    <#include "template2.ftl">
+    <#include "navTemplate2.ftl">
+    <table width="100%">
+        <tr><td align="center" bgcolor="#b2ff9c">Профиль</td></tr>
+    </table>
+    <div class="left-container">
+    <table class="table-light">
+        <thead class="thead-light">
+        <tr>
+            <th>First Name</th>
+            <td>${user.firstName}</td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td>${user.lastName}</td>
+        </tr>
+        <tr>
+            <th>Role</th>
+            <td>${user.role}</td>
+        </tr>
+        </thead>
+    </table>
+    </div>
     <div>
-        <h1>First Name:</h1>
-        <h2>${user.firstName}</h2>
-        <h1>Last Name:</h1>
-        <h2>${user.lastName}</h2>
         <table class="table">
-            <tr><td><a href="/articles">В магазин</a></td></tr>
-            <tr><td><a href="/users">Пользователи</a></td></tr>
+            <tr><td><a href="/users">Все пользователи</a></td></tr>
             <tr><td><a href="/users/carts">Все товары в корзине по всем пользователям</a></td></tr>
             <tr><td><a href="/users/pages?pageSize=3">Пользователи (pagination)</a></td></tr>
-            <tr><td><a href="/chat">Чат магазина</a></tr>
-            <tr><td><a href="/bootstrap">bootstrap</a></tr>
-            <tr><td><a href="/logout">logout</a></tr>
         </table>
     </div>
 </body>

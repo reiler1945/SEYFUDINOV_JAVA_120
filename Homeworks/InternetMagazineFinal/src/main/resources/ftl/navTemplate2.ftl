@@ -1,4 +1,4 @@
-<nav class = "nav navbar-expand-lg navbar-dark bg-dark">
+<nav class = "nav navbar-expand-lg navbar-light bg-light">
     <a href="#">
         <img src="/img/logomak_logo.png" width = "50" height="50">
     </a>

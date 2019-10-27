@@ -1,30 +1,17 @@
 <html>
 <head>
     <title>Корзина</title>
-    <#include "template1.ftl">
-    <#include "template3.ftl">
+    <#include "navTemplate1.ftl">
+    <#include "navTemplate3.ftl">
     <script src="js/cart.js"></script>
 </head>
 <body>
-<#include "template2.ftl">
+<#include "navTemplate2.ftl">
 <table width="100%">
-    <tr><td colspan="2" align="center" bgcolor="#f4a460">Корзина</td></tr>
-    <tr>
-        <td align="left">
-            <div id = 'profile'>
-                <a href="/profile">${user.firstName + " " +user.lastName}</a>
-                <a href="/logout">(logout)</a>
-            </div>
-        </td>
-        <td align="right">
-            <div id = 'articles'>
-                <a href="/articles">В магазин</a>
-            </div>
-        </td>
-    </tr>
+    <tr><td align="center" bgcolor="#b2ff9c">Корзина</td></tr>
 </table>
 <table id='articles-list' class="table">
-    <thead class="thead-dark">
+    <thead class="thead-light">
     <tr>
         <th>ID</th>
         <th>NAME</th>

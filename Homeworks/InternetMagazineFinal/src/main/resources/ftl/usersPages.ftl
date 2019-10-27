@@ -1,27 +1,14 @@
 <html>
 <head>
     <title>Users</title>
-    <#include "template1.ftl">
-    <#include "template3.ftl">
+    <#include "navTemplate1.ftl">
+    <#include "navTemplate3.ftl">
     <link rel="stylesheet" type="text/css" href="../css/usersPage.css"/>
 </head>
 <body>
-<#include "template2.ftl">
+<#include "navTemplate2.ftl">
 <table width="100%">
-    <tr><td colspan="2" align="center" bgcolor="#f4a460">Пользователи</td></tr>
-    <tr>
-        <td align="left">
-            <div id = 'profile'>
-                <a href="/profile">${user.firstName + " " +user.lastName}</a>
-                <a href="/logout">(logout)</a>
-            </div>
-        </td>
-        <td align="right">
-            <div id = 'articles'>
-                <a href="/articles">В магазин</a>
-            </div>
-        </td>
-    </tr>
+    <tr><td align="center" bgcolor="#b2ff9c">Пользователи(pagination)</td></tr>
 </table>
 <div>
     <table class="table">

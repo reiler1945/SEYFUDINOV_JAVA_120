@@ -2,29 +2,17 @@
 <html>
 <head>
     <title>chat</title>
-    <#include "template1.ftl">
-    <#include "template3.ftl">
+    <#include "navTemplate1.ftl">
+    <#include "navTemplate3.ftl">
     <script src="js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 </head>
 <body>
-<#include "template2.ftl">
+<#include "navTemplate2.ftl">
 <table width="100%">
-    <tr><td colspan="2" align="center" bgcolor="#f4a460">Чат</td></tr>
-    <tr>
-        <td align="left">
-            <div id = 'profile'>
-                <a href="/profile">${user.firstName + " " +user.lastName}</a>
-                <a href="/logout">(logout)</a>
-            </div>
-        </td>
-        <td align="right">
-            <div id = 'articles'>
-                <a href="/articles">В магазин</a>
-            </div>
-        </td>
-    </tr>
+    <tr><td align="center" bgcolor="#b2ff9c">Чат</td></tr>
 </table>
-<h1>Magazine Chat</h1>
 <div>
     <input type="hidden" id="userNamePrefix" value="${user.firstName + " " + user.lastName}">
     <input type="hidden" id="userId" value="${user.id}">

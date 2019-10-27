@@ -10,7 +10,7 @@ function deleteArticleFromCart(csrf, cartId, articleId) {
 
         let articlesListHtml = document.getElementById('articles-list');
         // создаем новую HTML-ку с новым списком
-        let newArticles = '<thead class="thead-dark">\n' +
+        let newArticles = '<thead class="thead-light">\n' +
             '        <tr>\n' +
             '            <th>ID</th>\n' +
             '            <th>NAME</th>\n' +
