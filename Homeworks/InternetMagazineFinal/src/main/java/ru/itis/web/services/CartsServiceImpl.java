@@ -10,6 +10,7 @@ import ru.itis.web.dto.UserDto;
 import ru.itis.web.models.Article;
 import ru.itis.web.models.Cart;
 import ru.itis.web.models.User;
+import ru.itis.web.repositories.ArticleRepository;
 import ru.itis.web.repositories.CartsRepository;
 
 import java.util.ArrayList;
@@ -18,6 +19,9 @@ import java.util.Optional;
 
 @Component
 public class CartsServiceImpl implements CartsService {
+
+    @Autowired
+    private ArticleRepository articleRepository;
 
     @Autowired
     private CartsRepository cartsRepository;
@@ -34,13 +38,17 @@ public class CartsServiceImpl implements CartsService {
     }
 
     @Override
+    @Transactional
     public void deleteArticleFromCart(Long cartId, Long articleId) {
         Cart cart = cartsRepository.getOne(cartId);
-        cart.getArticles().removeIf(article -> article.getId() == articleId);
+        //cart.getArticles().removeIf(article -> article.getId().equals(articleId));
+        Article article = articleRepository.findById(articleId).get();
+        cart.getArticles().remove(article);
         cartsRepository.save(cart);
     }
 
     @Override
+    @Transactional
     public void addArticleToCart(Long userId, Long articleId) {
         Optional <Cart> cartCandidate = cartsRepository.findByUser_Id(userId);
         Cart cart = cartCandidate.get();

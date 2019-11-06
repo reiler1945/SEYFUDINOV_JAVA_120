@@ -21,6 +21,7 @@ public class Cart {
 
     @ManyToMany
     @JoinTable( name = "fill_carts",
+                indexes = {},
                 joinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "id"),
                 inverseJoinColumns = @JoinColumn(name = "article_id", referencedColumnName = "id")
     )

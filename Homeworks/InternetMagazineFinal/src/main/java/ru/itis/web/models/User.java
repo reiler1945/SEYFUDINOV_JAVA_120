@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.itis.web.models.enums.UserRole;
+import ru.itis.web.models.enums.UserState;
 
 import javax.persistence.*;
 
@@ -13,7 +15,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "service_user")
-public class User {
+public class  User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,7 +24,10 @@ public class User {
     private String lastName;
     private String email;
     private String login;
-    private String password;
+    private String hashPassword;
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
+    @Enumerated(value = EnumType.STRING)
+    private UserState state;
+    private String confirmUUID;
 }

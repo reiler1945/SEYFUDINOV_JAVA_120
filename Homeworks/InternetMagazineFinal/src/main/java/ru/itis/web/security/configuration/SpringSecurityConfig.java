@@ -1,5 +1,7 @@
 package ru.itis.web.security.configuration;
 
+import freemarker.template.Template;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
@@ -18,6 +21,8 @@ import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 // конфигурация безопасности, отменяет стандартную конфигурацию Spring Security
 @EnableWebSecurity
@@ -51,6 +56,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 //.antMatchers(HttpMethod.POST, "/articles/add").hasAuthority("ADMIN")
                 .antMatchers("/profile/**").authenticated()
                 .antMatchers("/pay/**").authenticated()
+                .antMatchers("/email/confirm").permitAll()
                 .antMatchers("/signUp/**").permitAll()
                 .antMatchers("/").permitAll()
                 .and()

@@ -53,7 +53,7 @@
                 <div class="card">
                     <div class="card-header">Register</div>
                     <div class="card-body">
-                        <form action="/signUp" method="post">
+                        <form method="post">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
                             <div class="form-group row">

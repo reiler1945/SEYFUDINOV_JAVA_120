@@ -18,5 +18,9 @@ public interface UsersRepository extends JpaRepository<User, Long> {
     @Query(nativeQuery = true, value = "select count(*) from service_user")
     Integer getCountUsers();
 
+    boolean existsByConfirmUUID(String uuid);
 
+    User findByConfirmUUID(String uuid);
+
+    Optional<User> findByEmail(String email);
 }

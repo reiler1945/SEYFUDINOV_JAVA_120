@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.itis.web.models.User;
+import ru.itis.web.models.enums.UserState;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -36,7 +37,7 @@ public class UserDetailsImpl implements UserDetails {
     // метод для получения пароля ( в нашем случае хеш)
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return user.getHashPassword();
     }
 
     // метод для получения имени пользователя (в нашем случае - логин)
@@ -67,6 +68,6 @@ public class UserDetailsImpl implements UserDetails {
     // если у него стоит статус - подтвержден
     @Override
     public boolean isEnabled() {
-        return true;
+        return user.getState().equals(UserState.CONFIRMED);
     }
 }
